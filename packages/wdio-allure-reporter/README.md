@@ -164,7 +164,9 @@ First set `disableWebdriverScreenshotsReporting: false` in reporter options, the
 ```js title="wdio.conf.js"
 afterStep: function (test, scenario, { error, duration, passed }) {
   if (error) {
-    browser.takeScreenshot();
+     const screenshot = await browser.takeScreenshot()
+     allureReporter.addAttachment('screenshot.png', Buffer.from(screenshot, 'base64'), 'image/png')
+   })
   }
 }
 ```
